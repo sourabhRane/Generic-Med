@@ -306,13 +306,28 @@
     display:flex; flex-direction:column; align-items:center; gap:20px; text-align:center;
   }
   .qr-card-media{
-    flex-shrink:0; background:#fff; padding:10px; border-radius:16px;
+    position:relative; flex-shrink:0; background:#fff; padding:10px; border-radius:16px;
     border:1px solid var(--line); box-shadow:var(--shadow-sm);
+    display:block; cursor:pointer; overflow:hidden;
+    transition:transform .3s var(--ease), box-shadow .3s var(--ease);
   }
+  .qr-card-media:hover, .qr-card-media:focus-visible{ transform:translateY(-4px); box-shadow:var(--shadow-md); }
   .qr-card-media img{ width:150px; height:150px; display:block; border-radius:6px; }
+  .qr-card-media .qr-overlay{
+    position:absolute; inset:0; border-radius:16px;
+    background:rgba(10,77,68,.82); color:#fff;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    opacity:0; transition:opacity .25s var(--ease);
+  }
+  .qr-card-media:hover .qr-overlay, .qr-card-media:focus-visible .qr-overlay{ opacity:1; }
+  .qr-card-media .qr-overlay .icon{ width:26px; height:26px; }
+  .qr-card-media .qr-overlay span{ font-family:'Poppins',sans-serif; font-weight:600; font-size:.78rem; }
   .qr-card-text .eyebrow{ margin-bottom:10px; }
   .qr-card-text h3{ font-size:1.15rem; margin-bottom:8px; }
-  .qr-card-text p{ font-size:.9rem; margin-bottom:14px; }
+  .qr-card-text p{ font-size:.9rem; margin-bottom:6px; }
+  .qr-card-text .qr-hint{ font-size:.78rem; color:var(--muted); margin-bottom:14px; display:flex; align-items:center; gap:6px; justify-content:center; }
+  .qr-card-text .qr-hint .icon{ width:14px; height:14px; color:var(--primary-600); }
+  @media (min-width:640px){ .qr-card-text .qr-hint{ justify-content:flex-start; } }
   .qr-link{
     display:inline-block; font-family:'Poppins',monospace; font-size:.82rem; font-weight:600;
     color:var(--primary-700); background:var(--primary-50); border:1px dashed var(--primary-500);
@@ -649,9 +664,13 @@
   <section class="section-tight">
     <div class="container">
       <div class="qr-card reveal">
-        <div class="qr-card-media">
+        <a class="qr-card-media" href="qr-code.png" download="generic-medicines-qr-code.png" aria-label="Download this QR code as a PNG image">
           <img src="qr-code.png" alt="QR code linking to this generic medicines awareness page" width="170" height="170" loading="lazy">
-        </div>
+          <span class="qr-overlay">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0-5-5m5 5 5-5"/><path d="M4 19h16"/></svg>
+            <span>Download PNG</span>
+          </span>
+        </a>
         <div class="qr-card-text">
           <span class="eyebrow">
             <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 14h2v2h-2zM14 19h2v2h-2zM19 19h2v2h-2z"/></svg>
@@ -659,6 +678,10 @@
           </span>
           <h3>Scan to Open This Guide</h3>
           <p>No app needed — just point your phone camera at the code and share it with someone who could use the savings.</p>
+          <p class="qr-hint">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0-5-5m5 5 5-5"/><path d="M4 19h16"/></svg>
+            Tap the code to download it as a PNG
+          </p>
           <a class="qr-link" href="https://kashish-barud.vercel.app/">kashish-barud.vercel.app</a>
         </div>
       </div>
