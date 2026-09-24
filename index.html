@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Learn about generic medicines — same active ingredients, same safety, lower cost. A short guide for volunteers and communities.">
+<title>The Power of Generic Medicines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary-900:#0a4d44;
+    --primary-700:#0f766e;
+    --primary-600:#0d9488;
+    --primary-500:#14b8a6;
+    --primary-100:#d3f5ef;
+    --primary-50:#eefbf8;
+    --accent-600:#e11d48;
+    --accent-500:#fb7185;
+    --accent-100:#ffe4e9;
+    --amber-600:#d97706;
+    --amber-500:#f59e0b;
+    --amber-100:#fef3d9;
+    --ink-900:#12211f;
+    --ink-700:#33473f;
+    --muted:#5c6f68;
+    --bg:#faf6ee;
+    --card:#ffffff;
+    --line:#e7e0d2;
+    --shadow-sm: 0 2px 10px rgba(15,60,50,.06);
+    --shadow-md: 0 12px 28px rgba(15,60,50,.12);
+    --shadow-lg: 0 20px 45px rgba(15,60,50,.18);
+    --radius-lg: 22px;
+    --radius-md: 16px;
+    --ease: cubic-bezier(.22,1,.36,1);
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink-900);
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{
+    font-family:'Poppins',system-ui,sans-serif;
+    color:var(--primary-900);
+    margin:0 0 .5em;
+    line-height:1.25;
+  }
+  p{ margin:0 0 1em; color:var(--ink-700); }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; }
+  .container{ width:100%; max-width:1100px; margin:0 auto; padding:0 20px; }
+  section{ position:relative; }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:.72rem;
+    letter-spacing:.14em; text-transform:uppercase;
+    color:var(--primary-700); background:var(--primary-100);
+    padding:7px 14px; border-radius:999px; margin-bottom:14px;
+  }
+  .icon{ width:1em; height:1em; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{ opacity:0; transform:translateY(26px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+  .stagger.in-view > *{ transition-delay:calc(var(--i,0) * 90ms); }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 20px;
+    background:rgba(250,246,238,.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{ display:flex; align-items:center; gap:9px; font-family:'Poppins',sans-serif; font-weight:700; color:var(--primary-900); font-size:1rem; }
+  .brand .icon{ width:22px; height:22px; color:var(--accent-500); }
+  .top-cta{
+    display:inline-flex; align-items:center; gap:6px;
+    background:var(--primary-700); color:#fff; border:none;
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:.8rem;
+    padding:9px 16px; border-radius:999px; cursor:pointer;
+    box-shadow:var(--shadow-sm); transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .25s;
+  }
+  .top-cta:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md); background:var(--primary-600); }
+  .top-cta .icon{ width:15px; height:15px; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative; isolation:isolate; overflow:hidden;
+    min-height:78vh; display:flex; align-items:center;
+    padding:70px 0 60px;
+  }
+  .hero::before{
+    content:""; position:absolute; inset:0; z-index:-2;
+    background:url('https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+    transform:scale(1.08);
+  }
+  .hero::after{
+    content:""; position:absolute; inset:0; z-index:-1;
+    background:linear-gradient(160deg, rgba(10,77,68,.94) 10%, rgba(13,148,136,.88) 55%, rgba(15,118,110,.8) 100%);
+  }
+  .hero-inner{ position:relative; text-align:center; color:#fff; }
+  .hero-inner .eyebrow{ background:rgba(255,255,255,.16); color:#fff; }
+  .hero h1{
+    color:#fff; font-size:clamp(2rem,7vw,3.4rem); font-weight:800; letter-spacing:-.01em;
+    margin-bottom:.35em; animation:fadeUp .9s var(--ease) both;
+  }
+  .hero .lede{
+    color:rgba(255,255,255,.92); font-size:clamp(1rem,3.4vw,1.2rem);
+    max-width:560px; margin:0 auto 1.5em; animation:fadeUp .9s var(--ease) .15s both;
+  }
+  .hero-quote{
+    display:inline-block; font-family:'Poppins',sans-serif; font-weight:600; font-size:.95rem;
+    color:#fff; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.35);
+    padding:10px 20px; border-radius:999px; margin-bottom:1.8em;
+    animation:fadeUp .9s var(--ease) .3s both;
+  }
+  .hero-ctas{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; animation:fadeUp .9s var(--ease) .45s both; }
+  .btn{
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:.92rem;
+    padding:13px 26px; border-radius:999px; border:none; cursor:pointer;
+    display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+    transition:transform .28s var(--ease), box-shadow .28s var(--ease), background .28s, color .28s;
+  }
+  .btn-solid{ background:var(--amber-500); color:#2c1a04; box-shadow:0 10px 24px rgba(217,119,6,.35); }
+  .btn-solid:hover{ transform:translateY(-3px); box-shadow:0 16px 30px rgba(217,119,6,.42); }
+  .btn-ghost{ background:rgba(255,255,255,.12); color:#fff; border:1.5px solid rgba(255,255,255,.55); }
+  .btn-ghost:hover{ background:rgba(255,255,255,.24); transform:translateY(-3px); }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(24px);} to{opacity:1; transform:translateY(0);} }
+
+  /* heartbeat pulse strip */
+  .pulse-strip{ position:relative; width:100%; overflow:hidden; line-height:0; background:var(--primary-900); }
+  .pulse-strip svg{ display:block; }
+  .pulse-track{ display:flex; width:200%; animation:pulseScroll 9s linear infinite; }
+  .pulse-track svg{ width:50%; height:44px; flex-shrink:0; }
+  @keyframes pulseScroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  /* ---------- Section spacing ---------- */
+  .section{ padding:64px 0; }
+  .section-tight{ padding:44px 0; }
+  .section-head{ max-width:640px; margin:0 auto 40px; text-align:center; }
+  .section-head p{ margin:0 auto; }
+  .alt-bg{ background:var(--primary-50); }
+
+  /* ---------- Split (text + image) ---------- */
+  .split{ display:grid; grid-template-columns:1fr; gap:34px; align-items:center; }
+  .split-media{ position:relative; border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-lg); }
+  .split-media img{ width:100%; height:100%; object-fit:cover; aspect-ratio:4/3; transition:transform .6s var(--ease); }
+  .split-media:hover img{ transform:scale(1.06); }
+  .split-media .tag{
+    position:absolute; left:16px; bottom:16px;
+    background:rgba(255,255,255,.92); backdrop-filter:blur(4px);
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:.78rem; color:var(--primary-800,var(--primary-700));
+    padding:8px 14px; border-radius:999px; box-shadow:var(--shadow-sm);
+    display:flex; align-items:center; gap:6px;
+  }
+  .split-media .tag .icon{ width:14px; height:14px; color:var(--accent-600); }
+
+  .check-list{ list-style:none; margin:18px 0 0; padding:0; display:grid; gap:12px; }
+  .check-list li{
+    display:flex; align-items:flex-start; gap:10px; font-size:.96rem; color:var(--ink-700);
+  }
+  .check-list .tick{
+    flex-shrink:0; width:22px; height:22px; border-radius:50%;
+    background:var(--primary-100); color:var(--primary-700);
+    display:flex; align-items:center; justify-content:center; margin-top:1px;
+  }
+  .check-list .tick .icon{ width:12px; height:12px; stroke-width:3; }
+
+  .callout-strip{
+    margin-top:26px; padding:16px 18px; border-radius:14px;
+    background:linear-gradient(120deg, var(--amber-100), var(--primary-100));
+    border:1px dashed var(--amber-600);
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:.9rem; color:var(--primary-900);
+    display:flex; align-items:center; gap:10px;
+  }
+  .callout-strip .icon{ width:20px; height:20px; color:var(--accent-600); flex-shrink:0; }
+
+  /* ---------- Stats ---------- */
+  .stats{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  .stat-card{
+    background:var(--card); border-radius:var(--radius-md); padding:24px 16px; text-align:center;
+    box-shadow:var(--shadow-sm); border:1px solid var(--line);
+    transition:transform .3s var(--ease), box-shadow .3s var(--ease);
+  }
+  .stat-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-md); }
+  .stat-num{ font-family:'Poppins',sans-serif; font-weight:800; font-size:clamp(1.8rem,6vw,2.4rem); color:var(--primary-700); }
+  .stat-num small{ font-size:.55em; font-weight:700; }
+  .stat-label{ font-size:.82rem; color:var(--muted); font-weight:600; margin-top:4px; }
+  .stat-card.full{ grid-column:1 / -1; }
+
+  /* ---------- Why it matters cards ---------- */
+  .grid-cards{ display:grid; grid-template-columns:1fr; gap:16px; }
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius-md);
+    padding:22px 20px; box-shadow:var(--shadow-sm);
+    transition:transform .32s var(--ease), box-shadow .32s var(--ease), border-color .32s;
+  }
+  .card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-md); border-color:transparent; }
+  .card .icon-badge{
+    width:46px; height:46px; border-radius:13px; display:flex; align-items:center; justify-content:center;
+    background:var(--primary-100); color:var(--primary-700); margin-bottom:14px;
+  }
+  .card .icon-badge .icon{ width:24px; height:24px; }
+  .card h3{ font-size:1.02rem; margin-bottom:6px; }
+  .card p{ font-size:.9rem; margin-bottom:0; }
+
+  .grid-cards.tone-rose .icon-badge{ background:var(--accent-100); color:var(--accent-600); }
+  .grid-cards.tone-amber .icon-badge{ background:var(--amber-100); color:var(--amber-600); }
+
+  /* ---------- Photo band ---------- */
+  .photo-band{
+    position:relative; isolation:isolate; overflow:hidden;
+    min-height:340px; display:flex; align-items:center; padding:56px 0;
+  }
+  .photo-band::before{
+    content:""; position:absolute; inset:0; z-index:-2; background-size:cover; background-position:center;
+    transform:scale(1.05);
+  }
+  .photo-band.band-1::before{ background-image:url('https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=1200&q=80'); }
+  .photo-band.band-2::before{ background-image:url('https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?auto=format&fit=crop&w=1200&q=80'); }
+  .photo-band::after{ content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(100deg, rgba(10,42,38,.88) 30%, rgba(10,42,38,.45) 100%); }
+  .band-content{ color:#fff; max-width:480px; }
+  .band-content .eyebrow{ background:rgba(255,255,255,.18); color:#fff; }
+  .band-content h2{ color:#fff; font-size:clamp(1.5rem,5vw,2.1rem); }
+  .band-content p{ color:rgba(255,255,255,.88); }
+
+  /* ---------- Benefit tabs / pillars ---------- */
+  .pillars{ display:grid; grid-template-columns:1fr; gap:18px; }
+  .pillar{
+    border-radius:var(--radius-lg); padding:26px 22px; color:#fff; position:relative; overflow:hidden;
+    box-shadow:var(--shadow-md);
+    transition:transform .35s var(--ease);
+  }
+  .pillar:hover{ transform:translateY(-6px) rotate(-.3deg); }
+  .pillar::after{ content:""; position:absolute; inset:0; background:radial-gradient(circle at 85% -10%, rgba(255,255,255,.22), transparent 55%); }
+  .pillar-you{ background:linear-gradient(135deg,var(--primary-700),var(--primary-500)); }
+  .pillar-society{ background:linear-gradient(135deg,#9d174d,var(--accent-500)); }
+  .pillar-planet{ background:linear-gradient(135deg,#166534,#4ade80); }
+  .pillar h3{ color:#fff; display:flex; align-items:center; gap:10px; font-size:1.08rem; }
+  .pillar h3 .icon{ width:22px; height:22px; }
+  .pillar ul{ margin:14px 0 0; padding:0; list-style:none; display:grid; gap:9px; position:relative; }
+  .pillar li{ display:flex; gap:8px; align-items:flex-start; font-size:.9rem; color:rgba(255,255,255,.95); }
+  .pillar li .icon{ width:15px; height:15px; margin-top:2px; flex-shrink:0; }
+
+  /* ---------- Cost compare ---------- */
+  .compare{ margin-top:20px; display:grid; gap:14px; }
+  .compare-row{ display:grid; grid-template-columns:82px 1fr; align-items:center; gap:12px; }
+  .compare-row span{ font-family:'Poppins',sans-serif; font-weight:600; font-size:.82rem; color:var(--ink-700); }
+  .bar-track{ height:14px; border-radius:999px; background:var(--primary-50); overflow:hidden; border:1px solid var(--line); }
+  .bar-fill{ height:100%; width:0%; border-radius:999px; transition:width 1.1s var(--ease); }
+  .bar-fill.branded{ background:linear-gradient(90deg,#cbd5c9,#94a89f); }
+  .bar-fill.generic{ background:linear-gradient(90deg,var(--primary-500),var(--primary-700)); }
+  .reveal.in-view .bar-fill.branded{ width:100%; }
+  .reveal.in-view .bar-fill.generic{ width:22%; }
+
+  /* ---------- Volunteer / CTA ---------- */
+  .cta-panel{
+    background:linear-gradient(150deg,var(--primary-900),var(--primary-600));
+    border-radius:28px; padding:42px 26px; color:#fff; text-align:center; position:relative; overflow:hidden;
+    box-shadow:var(--shadow-lg);
+  }
+  .cta-panel::before{
+    content:"♥"; position:absolute; font-size:14rem; opacity:.06; right:-30px; top:-40px; color:#fff;
+    font-family:'Poppins',sans-serif;
+  }
+  .cta-panel h2{ color:#fff; font-size:clamp(1.5rem,5vw,2rem); }
+  .cta-panel p{ color:rgba(255,255,255,.9); max-width:520px; margin:0 auto 1.4em; }
+  .chip-row{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:22px 0 26px; }
+  .chip{
+    display:inline-flex; align-items:center; gap:7px;
+    background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.3);
+    padding:9px 15px; border-radius:999px; font-size:.82rem; font-weight:600;
+  }
+  .chip .icon{ width:14px; height:14px; color:var(--amber-500); }
+  .cta-buttons{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+
+  #toast{
+    position:fixed; left:50%; bottom:26px; transform:translate(-50%,20px);
+    background:var(--primary-900); color:#fff; padding:12px 20px; border-radius:999px;
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:.85rem;
+    box-shadow:var(--shadow-lg); opacity:0; pointer-events:none; transition:all .4s var(--ease); z-index:80;
+    display:flex; align-items:center; gap:8px;
+  }
+  #toast.show{ opacity:1; transform:translate(-50%,0); }
+
+  /* ---------- Footer ---------- */
+  footer{ background:var(--primary-900); color:rgba(255,255,255,.85); padding:36px 0 26px; text-align:center; }
+  footer .brand{ color:#fff; justify-content:center; margin-bottom:10px; }
+  footer .tagline{ font-family:'Poppins',sans-serif; font-weight:700; letter-spacing:.08em; font-size:.82rem; color:#fff; text-transform:uppercase; }
+  footer .fine{ font-size:.76rem; color:rgba(255,255,255,.55); margin-top:14px; }
+
+  /* share sheet (fallback for browsers without native share) */
+  .share-overlay{
+    position:fixed; inset:0; z-index:90; background:rgba(8,28,24,.55);
+    display:flex; align-items:flex-end; justify-content:center;
+    opacity:0; pointer-events:none; transition:opacity .3s var(--ease);
+  }
+  .share-overlay.show{ opacity:1; pointer-events:auto; }
+  .share-sheet{
+    width:100%; max-width:440px; background:var(--card);
+    border-radius:26px 26px 0 0; padding:20px 22px 24px;
+    transform:translateY(100%); transition:transform .38s var(--ease);
+    box-shadow:var(--shadow-lg);
+  }
+  .share-overlay.show .share-sheet{ transform:translateY(0); }
+  .share-sheet-handle{ width:40px; height:4px; background:var(--line); border-radius:99px; margin:0 auto 16px; }
+  .share-sheet h3{ text-align:center; font-size:1rem; margin-bottom:4px; }
+  .share-sheet .hint{ text-align:center; font-size:.8rem; color:var(--muted); margin-bottom:18px; }
+  .share-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px 10px; margin-bottom:18px; }
+  .share-opt{
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    font-size:.74rem; font-weight:600; color:var(--ink-700); text-decoration:none;
+    background:none; border:none; cursor:pointer; font-family:'Poppins',sans-serif;
+  }
+  .share-ico{
+    width:52px; height:52px; border-radius:16px; display:flex; align-items:center; justify-content:center;
+    color:#fff; transition:transform .25s var(--ease), box-shadow .25s var(--ease); box-shadow:var(--shadow-sm);
+  }
+  .share-opt:hover .share-ico{ transform:translateY(-4px) scale(1.05); }
+  .share-ico svg{ width:24px; height:24px; }
+  .share-ico.wa{ background:#25D366; }
+  .share-ico.tg{ background:#229ED9; }
+  .share-ico.fb{ background:#1877F2; }
+  .share-ico.x{ background:#111827; }
+  .share-ico.mail{ background:var(--amber-500); color:#2c1a04; }
+  .share-ico.copy{ background:var(--primary-600); }
+  .share-close{
+    width:100%; padding:13px; border-radius:999px; border:1px solid var(--line);
+    background:var(--bg); font-family:'Poppins',sans-serif; font-weight:600; font-size:.88rem; cursor:pointer;
+  }
+
+  /* floating share button */
+  .fab{
+    position:fixed; right:18px; bottom:18px; z-index:60;
+    width:54px; height:54px; border-radius:50%; border:none; cursor:pointer;
+    background:var(--amber-500); color:#2c1a04; box-shadow:0 10px 24px rgba(217,119,6,.4);
+    display:flex; align-items:center; justify-content:center;
+    animation:floaty 3.2s ease-in-out infinite;
+    transition:transform .25s var(--ease);
+  }
+  .fab:hover{ transform:scale(1.08); }
+  .fab .icon{ width:22px; height:22px; }
+  @keyframes floaty{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-7px); } }
+
+  /* ---------- Responsive ---------- */
+  @media (min-width:640px){
+    .stats{ grid-template-columns:repeat(3,1fr); }
+    .stat-card.full{ grid-column:auto; }
+    .grid-cards{ grid-template-columns:repeat(2,1fr); }
+    .pillars{ grid-template-columns:repeat(3,1fr); }
+  }
+  @media (min-width:860px){
+    .split{ grid-template-columns:1fr 1fr; gap:56px; }
+    .split.reverse .split-media{ order:2; }
+    .grid-cards{ grid-template-columns:repeat(3,1fr); }
+    .hero{ min-height:86vh; }
+    .cta-panel{ padding:56px 60px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="brand">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+      Generic Care Guide
+    </div>
+    <button class="top-cta" onclick="document.getElementById('volunteer').scrollIntoView({behavior:'smooth'})">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.3 8 2 4 6 4c2.2 0 3.8 1.2 6 3.5C14.2 5.2 15.8 4 18 4c4 0 5.7 4 4 7.7C19.5 16.4 12 21 12 21Z"/></svg>
+      Volunteer
+    </button>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container hero-inner">
+      <span class="eyebrow">
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+        Same Quality &middot; Same Safety
+      </span>
+      <h1>The Power of<br>Generic Medicines</h1>
+      <p class="lede">Same active ingredient. Same effect. Just a kinder price — for you, your family, and your community.</p>
+      <span class="hero-quote">"Same medicine, same effect, lower cost, bigger smiles" 💚</span>
+      <div class="hero-ctas">
+        <a class="btn btn-solid" href="#what-is">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg>
+          Learn the Basics
+        </a>
+        <a class="btn btn-ghost" href="#volunteer">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.3 8 2 4 6 4c2.2 0 3.8 1.2 6 3.5C14.2 5.2 15.8 4 18 4c4 0 5.7 4 4 7.7C19.5 16.4 12 21 12 21Z"/></svg>
+          Become a Volunteer
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Pulse strip -->
+  <div class="pulse-strip" aria-hidden="true">
+    <div class="pulse-track">
+      <svg viewBox="0 0 600 44" preserveAspectRatio="none"><polyline points="0,22 60,22 80,22 95,6 110,38 125,22 150,22 170,22 190,10 205,34 220,22 250,22 300,22 320,22 335,6 350,38 365,22 390,22 410,22 430,10 445,34 460,22 490,22 540,22 560,22 575,6 590,38 600,22" fill="none" stroke="#5eead4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg viewBox="0 0 600 44" preserveAspectRatio="none"><polyline points="0,22 60,22 80,22 95,6 110,38 125,22 150,22 170,22 190,10 205,34 220,22 250,22 300,22 320,22 335,6 350,38 365,22 390,22 410,22 430,10 445,34 460,22 490,22 540,22 560,22 575,6 590,38 600,22" fill="none" stroke="#5eead4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+
+  <!-- WHAT ARE GENERIC MEDICINES -->
+  <section class="section" id="what-is">
+    <div class="container">
+      <div class="split reveal">
+        <div>
+          <span class="eyebrow">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 1 5 5v3a5 5 0 0 1-10 0V7a5 5 0 0 1 5-5Z"/><path d="M7 10h10M9 22v-4M15 22v-4M7 22h10"/></svg>
+            What are they?
+          </span>
+          <h2>What Are Generic Medicines?</h2>
+          <p>Generic medicines contain the exact same active ingredients as branded medicines, work in the same way, and are held to the same safety and quality standards. The only real difference is the price.</p>
+          <ul class="check-list">
+            <li><span class="tick"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Same active ingredient, same strength &amp; dosage</li>
+            <li><span class="tick"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Tested and approved to the same quality standards</li>
+            <li><span class="tick"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Produced only after the original patent expires</li>
+          </ul>
+          <div class="callout-strip">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.3 8 2 4 6 4c2.2 0 3.8 1.2 6 3.5C14.2 5.2 15.8 4 18 4c4 0 5.7 4 4 7.7C19.5 16.4 12 21 12 21Z"/></svg>
+            Generic Medicine = Healthy People + Stronger Communities
+          </div>
+        </div>
+        <div class="split-media">
+          <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?auto=format&fit=crop&w=900&q=80" alt="A colourful assortment of generic tablets and capsules" loading="lazy">
+          <span class="tag">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.3 8 2 4 6 4c2.2 0 3.8 1.2 6 3.5C14.2 5.2 15.8 4 18 4c4 0 5.7 4 4 7.7C19.5 16.4 12 21 12 21Z"/></svg>
+            Same medicine, different look
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="section-tight alt-bg">
+    <div class="container">
+      <div class="stats reveal stagger">
+        <div class="stat-card" style="--i:0">
+          <div class="stat-num"><span class="counter" data-target="80">0</span><small>%+</small></div>
+          <div class="stat-label">Average cost savings</div>
+        </div>
+        <div class="stat-card" style="--i:1">
+          <div class="stat-num"><span class="counter" data-target="100">0</span><small>%</small></div>
+          <div class="stat-label">Same active ingredients</div>
+        </div>
+        <div class="stat-card full" style="--i:2">
+          <div class="stat-num" style="font-size:1.6rem">
+            <svg class="icon" viewBox="0 0 24 24" style="width:1.2em;height:1.2em;color:var(--primary-600);vertical-align:-3px"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+            Approved
+          </div>
+          <div class="stat-label">Quality &amp; safety standards</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY IT MATTERS -->
+  <section class="section" id="why">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.3 8 2 4 6 4c2.2 0 3.8 1.2 6 3.5C14.2 5.2 15.8 4 18 4c4 0 5.7 4 4 7.7C19.5 16.4 12 21 12 21Z"/></svg>
+          Why It Matters
+        </span>
+        <h2>Good Health Shouldn't Be a Luxury</h2>
+        <p>Access to affordable medicine changes outcomes — for individuals and for entire health systems.</p>
+      </div>
+      <div class="grid-cards reveal stagger">
+        <div class="card" style="--i:0">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M3 11h18M7 15h.01M11 15h4"/></svg></div>
+          <h3>Affordable for Everyone</h3>
+          <p>Lower prices mean more families can access the treatment they need, without financial strain.</p>
+        </div>
+        <div class="card" style="--i:1">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg></div>
+          <h3>Ensures Continuous Treatment</h3>
+          <p>Affordability helps patients stay on long-term medication without gaps or interruptions.</p>
+        </div>
+        <div class="card" style="--i:2">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <h3>Reduces Out-of-Pocket Costs</h3>
+          <p>Every rupee saved on medicine is a rupee kept for food, education, or emergencies.</p>
+        </div>
+        <div class="card" style="--i:3">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <h3>Better Adherence to Therapy</h3>
+          <p>When medicine is affordable, patients are far more likely to complete their full course.</p>
+        </div>
+        <div class="card" style="--i:4">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.3 8 2 4 6 4c2.2 0 3.8 1.2 6 3.5C14.2 5.2 15.8 4 18 4c4 0 5.7 4 4 7.7C19.5 16.4 12 21 12 21Z"/></svg></div>
+          <h3>Supports Public Health</h3>
+          <p>Wider access to essential medicine strengthens the health of the whole community.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO BAND 1 -->
+  <section class="photo-band band-1 reveal">
+    <div class="container">
+      <div class="band-content">
+        <span class="eyebrow">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          The Money Talk
+        </span>
+        <h2>Same Result, Kinder Price</h2>
+        <p>Generic versions can cost a fraction of the branded price — savings that add up fast on long-term or chronic medication.</p>
+        <div class="compare">
+          <div class="compare-row"><span>Branded</span><div class="bar-track"><div class="bar-fill branded"></div></div></div>
+          <div class="compare-row"><span>Generic</span><div class="bar-track"><div class="bar-fill generic"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS: You / Society / Planet -->
+  <section class="section" id="benefits">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          Who Benefits
+        </span>
+        <h2>Benefits That Reach Everyone</h2>
+        <p>From your wallet to the wellbeing of the planet — the ripple effect of choosing generic is real.</p>
+      </div>
+      <div class="pillars reveal stagger">
+        <div class="pillar pillar-you" style="--i:0">
+          <h3><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Good for You</h3>
+          <ul>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Same effectiveness, lower cost</li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Quality assured &amp; widely available</li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>More savings for what matters most</li>
+          </ul>
+        </div>
+        <div class="pillar pillar-society" style="--i:1">
+          <h3><svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>Good for Society</h3>
+          <ul>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Makes healthcare more accessible</li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Eases the burden on health systems</li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Builds a healthier, stronger nation</li>
+          </ul>
+        </div>
+        <div class="pillar pillar-planet" style="--i:2">
+          <h3><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/></svg>Good for the Planet</h3>
+          <ul>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Less waste from resource-heavy R&amp;D</li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Supports sustainable healthcare</li>
+            <li><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Healthier access, healthier communities</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO BAND 2 -->
+  <section class="photo-band band-2 reveal">
+    <div class="container">
+      <div class="band-content">
+        <span class="eyebrow">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/></svg>
+          Real Access
+        </span>
+        <h2>More Access, More Smiles</h2>
+        <p>When medicine is affordable, families keep coming back for care — check-ups don't get skipped, and treatment doesn't get delayed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING BANNER -->
+  <section class="section-tight">
+    <div class="container">
+      <div class="reveal" style="text-align:center;">
+        <h2 style="font-size:clamp(1.4rem,5vw,2rem)">Generic Today, Healthier Tomorrow</h2>
+        <p style="max-width:480px;margin:0 auto">A small choice at the pharmacy counter can mean a healthier tomorrow for your whole family.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOLUNTEER / SPREAD THE WORD -->
+  <section class="section" id="volunteer">
+    <div class="container">
+      <div class="cta-panel reveal">
+        <span class="eyebrow" style="background:rgba(255,255,255,.16);color:#fff;">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.3 8 2 4 6 4c2.2 0 3.8 1.2 6 3.5C14.2 5.2 15.8 4 18 4c4 0 5.7 4 4 7.7C19.5 16.4 12 21 12 21Z"/></svg>
+          Join the Effort
+        </span>
+        <h2>Help Us Spread the Word</h2>
+        <p>Most people simply don't know that a cheaper, equally safe option exists. As a volunteer, you don't need a medical degree to make a difference — just a willingness to share what you've learned. One honest conversation with a neighbour, a parent, or a shopkeeper can change how a whole family thinks about their next prescription.</p>
+        <div class="chip-row">
+          <span class="chip"><svg class="icon" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-4.7 7.6 8.5 8.5 0 0 1-8.6-.4L3 20l1.3-4.7a8.5 8.5 0 0 1 1.9-9A8.38 8.38 0 0 1 13.5 3a8.5 8.5 0 0 1 7.5 8.5Z"/></svg>Talk to your pharmacist</span>
+          <span class="chip"><svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/></svg>Educate your family</span>
+          <span class="chip"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>Ask "is there a generic?"</span>
+        </div>
+        <div class="cta-buttons">
+          <button class="btn btn-solid" id="shareBtn">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5 15.4 17M15.4 7 8.6 10.5"/></svg>
+            Share This Page
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="brand">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+        Generic Medicines
+      </div>
+      <div class="tagline">Better Access &middot; Better Health &middot; Brighter Future</div>
+      <p class="fine">Look for the generic option next time you're at the pharmacy — and please always follow your doctor's or pharmacist's advice before switching any medication.</p>
+    </div>
+  </footer>
+
+  <div class="pulse-strip" aria-hidden="true">
+    <div class="pulse-track">
+      <svg viewBox="0 0 600 44" preserveAspectRatio="none"><polyline points="0,22 60,22 80,22 95,6 110,38 125,22 150,22 170,22 190,10 205,34 220,22 250,22 300,22 320,22 335,6 350,38 365,22 390,22 410,22 430,10 445,34 460,22 490,22 540,22 560,22 575,6 590,38 600,22" fill="none" stroke="#fb7185" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg viewBox="0 0 600 44" preserveAspectRatio="none"><polyline points="0,22 60,22 80,22 95,6 110,38 125,22 150,22 170,22 190,10 205,34 220,22 250,22 300,22 320,22 335,6 350,38 365,22 390,22 410,22 430,10 445,34 460,22 490,22 540,22 560,22 575,6 590,38 600,22" fill="none" stroke="#fb7185" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+
+  <button class="fab" id="fabShare" aria-label="Share this page" title="Share this page">
+    <svg class="icon" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5 15.4 17M15.4 7 8.6 10.5"/></svg>
+  </button>
+
+  <div id="toast">
+    <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+    <span id="toastMsg">Link copied! Share it with someone today.</span>
+  </div>
+
+  <!-- Fallback share sheet: used when the device has no native share sheet -->
+  <div class="share-overlay" id="shareOverlay" aria-hidden="true">
+    <div class="share-sheet" role="dialog" aria-label="Share this page">
+      <div class="share-sheet-handle"></div>
+      <h3>Share this page</h3>
+      <p class="hint">Spread the word about generic medicines</p>
+      <div class="share-grid">
+        <a class="share-opt" id="waShare" target="_blank" rel="noopener">
+          <span class="share-ico wa"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.2-.1.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.2-1.3-.1-.1-.3-.2-.5-.3Z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.2-.4-4.5-1.3l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg></span>
+          WhatsApp
+        </a>
+        <a class="share-opt" id="tgShare" target="_blank" rel="noopener">
+          <span class="share-ico tg"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 2.7 11.8c-.9.4-.9 1.5.1 1.8l4.7 1.5 1.8 5.7c.2.7 1.1.9 1.6.4l2.6-2.5 4.9 3.6c.8.6 1.9.1 2.1-.8l3.6-16.6c.2-1-.8-1.9-1.8-1.5ZM8.6 14.6l9.6-6.1c.3-.2.6.2.3.4l-8 7.5-.3 3-1.6-4.8Z"/></svg></span>
+          Telegram
+        </a>
+        <a class="share-opt" id="fbShare" target="_blank" rel="noopener">
+          <span class="share-ico fb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5H16l.4-3H13.5V8.4c0-.9.2-1.5 1.5-1.5h1.6V4.3C16.3 4.2 15.3 4 14.2 4c-2.4 0-4 1.5-4 4.1v2.4H7.8v3h2.4V21h3.3Z"/></svg></span>
+          Facebook
+        </a>
+        <a class="share-opt" id="xShare" target="_blank" rel="noopener">
+          <span class="share-ico x"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h4.4l4 5.5L16.9 3H20l-6.4 8.3L20.4 21H16l-4.3-5.9L6.9 21H3.7l6.8-8.7L4 3Z"/></svg></span>
+          X
+        </a>
+        <a class="share-opt" id="mailShare">
+          <span class="share-ico mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+          Email
+        </a>
+        <button class="share-opt" id="copyShare" type="button">
+          <span class="share-ico copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg></span>
+          Copy Link
+        </button>
+      </div>
+      <button class="share-close" id="shareClose" type="button">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // Scroll reveal
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } });
+    },{ threshold:.18 });
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // Count-up stats
+    const counters = document.querySelectorAll('.counter');
+    const cio = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = +el.dataset.target;
+        const start = performance.now();
+        const dur = 1200;
+        function tick(now){
+          const p = Math.min((now-start)/dur, 1);
+          el.textContent = Math.round(target * (1 - Math.pow(1-p, 3)));
+          if(p<1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        cio.unobserve(el);
+      });
+    },{ threshold:.5 });
+    counters.forEach(c=>cio.observe(c));
+
+    // ---- Share ----
+    // On a phone, navigator.share() opens the device's OWN native share sheet —
+    // that's the system UI that lists WhatsApp, Instagram, Snapchat, Messages, etc.,
+    // built from whatever share-capable apps are actually installed. A website can't
+    // list those apps itself; only the OS knows what's installed, so this native
+    // sheet is the real way to reach them. Where it's unavailable (most desktop
+    // browsers), we fall back to a custom sheet with direct WhatsApp/Telegram/
+    // Facebook/X/Email links plus Copy Link — Instagram and Snapchat don't offer a
+    // public web-share link, so they can only appear via the native sheet above.
+    const shareText = 'Learn about generic medicines — same quality, same safety, lower cost.';
+
+    async function sharePage(){
+      const shareData = { title: document.title, text: shareText, url: location.href };
+      if(navigator.share){
+        try{ await navigator.share(shareData); return; }
+        catch(err){ if(err && err.name === 'AbortError') return; }
+      }
+      openShareSheet();
+    }
+
+    function openShareSheet(){
+      const url = encodeURIComponent(location.href);
+      const text = encodeURIComponent(shareText);
+      document.getElementById('waShare').href = `https://wa.me/?text=${text}%20${url}`;
+      document.getElementById('tgShare').href = `https://t.me/share/url?url=${url}&text=${text}`;
+      document.getElementById('fbShare').href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+      document.getElementById('xShare').href = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+      document.getElementById('mailShare').href = `mailto:?subject=${encodeURIComponent(document.title)}&body=${text}%20${url}`;
+      document.getElementById('shareOverlay').classList.add('show');
+      document.getElementById('shareOverlay').setAttribute('aria-hidden','false');
+    }
+    function closeShareSheet(){
+      document.getElementById('shareOverlay').classList.remove('show');
+      document.getElementById('shareOverlay').setAttribute('aria-hidden','true');
+    }
+    document.getElementById('shareClose').addEventListener('click', closeShareSheet);
+    document.getElementById('shareOverlay').addEventListener('click', (e)=>{
+      if(e.target.id === 'shareOverlay') closeShareSheet();
+    });
+    document.getElementById('copyShare').addEventListener('click', async ()=>{
+      try{
+        await navigator.clipboard.writeText(location.href);
+        showToast('Link copied! Paste it anywhere to share.');
+      }catch(err){
+        showToast("Copy this page's address to share it.");
+      }
+      closeShareSheet();
+    });
+
+    function showToast(msg){
+      const t = document.getElementById('toast');
+      document.getElementById('toastMsg').textContent = msg;
+      t.classList.add('show');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(()=>t.classList.remove('show'), 2600);
+    }
+    document.getElementById('shareBtn').addEventListener('click', sharePage);
+    document.getElementById('fabShare').addEventListener('click', sharePage);
+  </script>
+</body>
+</html>
